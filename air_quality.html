@@ -9,6 +9,12 @@
           background-color: #f4f4f4;
           color: #333;
         }
+        table, th, td {
+          border: 1px solid black;
+          border-collapse: collapse;
+          padding: 5px;
+        }
+  
         header {
           background-color: #990000;
           color: white;
@@ -47,8 +53,250 @@
     <a href="about.html">About Me</a>
   </nav>
   <main>
-    <p>This device uses environmental sensors to measure particulate matter, CO₂, and VOC levels.</p>
-    <img src="images/air_quality_device.jpg" alt="Air Quality Monitor" width="500" />
+    <h3 style="width: 70%; margin: 0 auto">Project Overview:</h3>
+    <br>
+    <p  style="width: 70%; margin: 0 auto"> 
+        The main goal of this project was to design and build a relatively small and cost-effective device that can be used to 
+        monitor air quality. More specifically, the device reads temperature and humidity, as well as common indoor pollutants 
+        including CO2, particulate matter (PM1.0, PM2.5, and PM10), and total volatile organic compounds (TVOCs). Additionally, 
+        the LED periodically blinks and the buzzer goes off when the measured air quality is "unhealthy." The cutoff values to 
+        trigger this alarm function were determined somewhat arbitrarily in the code based on the World Health Organization's 
+        recommended levels. 
+    </p>
+    <br>
+    <p  style="width: 70%; margin: 0 auto">
+        The main design considerations were as follows:
+    </p>
+    <br>
+    <ul style="width: 70%; margin: 0 auto">
+        <li> <b>Cost-effective design:</b> The prices of home air quality monitors can often go well above $100. This is especially 
+            true if the device is good quality, and if it is measuring a lot of parameters. This project aims to design a device 
+            that is still good quality, and measures as many important parameters as possible while staying in the $50-60 range.
+        </li>
+        <br>
+        <li>
+            <b>Small size:</b>The device should ideally be compact enough to be easily carried around by hand. This would allow users 
+            to take measurements wherever they want. The device can be powered easily using a phone or a power bank.
+        </li>
+        <br>
+        <li>
+            <b>Usability:</b>The device was designed to ensure that even someone with little to no knowledge of any electronics can 
+            utilize it. All that is necessary for the device to function is power, which is provided to the board by plugging a cable 
+            into the USB port located on the Arduino. After the device is powered up, it boots up automatically and starts displaying 
+            sensor readings on the OLED screen on board. If the user has some knowledge of electronics, they can also easily modify 
+            the code, or write their own code and flash it onto the microcontroller board using Arduino IDE or another platform 
+            (by connecting their computer to the microcontroller board through the same USB port used to power the device).
+        </li>
+    </ul>
+    <br>
+    <p  style="width: 70%; margin: 0 auto"> 
+        The sensors and various other parts used for this project are listed below, along with the datasheets if applicable:
+     </p>
+    <br> 
+    <br>
+    <table style="width: 70%; margin: 0 auto">
+        <tr>
+            <td><b>Part Name</b></td>
+            <td><b>Description</b></td>
+            <td><b>Datasheet</b></td>
+        </tr>
+        <tr>
+            <td>MH-Z19C</td>
+            <td>CO2 sensor</td>
+            <td><a href="https://www.winsen-sensor.com/d/files/infrared-gas-sensor/mh-z19c-pins-type-co2-manual-ver1_0.pdf">link</a></td>
+        </tr>
+
+        <tr>
+            <td>PMS5003</td>
+            <td>Particle concentration sensor</td>
+            <td><a href="https://www.aqmd.gov/docs/default-source/aq-spec/resources-page/plantower-pms5003-manual_v2-3.pdf">link</a></td>
+        </tr>
+
+        <tr>
+            <td>DHT11</td>
+            <td>Temperature & humidity sensor</td>
+            <td><a href="https://www.mouser.com/datasheet/2/758/DHT11-Technical-Data-Sheet-Translated-Version-1143054.pdf?srsltid=AfmBOorpAeAi1GzEUXS4Ctfn62FirQ5GYK4s8ggOc51qJHOmKIENgNEG">link</a></td>
+        </tr>
+
+        <tr>
+            <td>MP503</td>
+            <td>TVOC sensor (total volatile organic compounds)</td>
+            <td><a href="https://www.winsen-sensor.com/d/files/MP503.pdf">link</a></td>
+        </tr>
+
+        <tr>
+            <td>SSD1306</td>
+            <td>OLED display</td>
+            <td>-</td>
+        </tr>
+
+        <tr>
+            <td>Arduino Nano</td>
+            <td>Microcontroller board</td>
+            <td><a href="https://docs.arduino.cc/resources/datasheets/A000005-datasheet.pdf">link</a></td>
+        </tr>
+
+        <tr>
+            <td>x1 470Ω Resistor</td>
+            <td>Used to limit current through the buzzer & LED</td>
+            <td>N/A</td>
+        </tr>
+
+        <tr>
+            <td>x1 1kΩ Resistor</td>
+            <td>Used for level shifting</td>
+            <td>N/A</td>
+        </tr>
+
+        <tr>
+            <td>x1 2kΩ Resistor</td>
+            <td>Used for level shifting</td>
+            <td>N/A</td>
+        </tr>
+
+        <tr>
+            <td>x1 10kΩ Resistor</td>
+            <td>For reading from MP503</td>
+            <td>N/A</td>
+        </tr>
+
+        <tr>
+            <td>x1 5mm Red LED</td>
+            <td>Alarm</td>
+            <td>N/A</td>
+        </tr>
+
+        <tr>
+            <td>Piezoelectric Buzzer</td>
+            <td>Alarm</td>
+            <td>-</td>
+        </tr>
+
+        <tr>
+            <td>x2 10uF electrolytic capacitors</td>
+            <td>Decoupling - stabilizing power</td>
+            <td>N/A</td>
+        </tr>
+
+        <tr>
+            <td>x6 0.1 uF (100nF) ceramic capacitors</td>
+            <td>Bypass - slow down ripple in readings</td>
+            <td>N/A</td>
+        </tr>
+
+    </table>
+    <br>
+    <br>
+
+
+    <h3 style="width: 70%; margin: 0 auto"> Project Schematic: </h3>
+    <br>
+    <p  style="width: 70%; margin: 0 auto">The sensors, the screen, and the microcontroller are connected as described by the 
+        schematic below:
+    </p>
+    <br>
+    <img src="images/schematicV2.png" alt="schematic" width="500" style="display: block; margin: 0 auto; width: 50%;"/>
+    <br>
+    <p  style="width: 70%; margin: 0 auto">Important Notes:</p>
+    <br>
+
+    <ul style="width: 70%; margin: 0 auto">
+        <li> The SSD1306 OLED screen module used for this project does have internal pull-up resistors included, so additional 
+            resistors are not needed for the I2C (SCL/SDA) communication lines. The module is also 3.3 and 5 V compatible, so logic 
+            shifters are not needed.
+        </li>
+        <br>
+        <li>
+            The buzzer used for this project is the GT-0905A-P. It is a piezoelectric buzzer, not magnetic, so it does not need a 
+            snubber diode connected in reverse across the buzzer to clamp the voltage spike generated when the buzzer is switched 
+            off to protect the GPIO pin it is connected to.
+        </li>
+        <br>
+        <li>
+            The MHZ19C sensor operates on a 3.3V logic level, but is compatible with 5V as well. The device needs to be powered with
+             5V. Outputs UART signals.
+        </li>
+        <br>
+        <li>
+            Similarly, the PMS5003 sensor needs to be powered with 5V and uses UART. However, the serial ports are not compatible 
+            with 5V (TTL level 3.3V). Therefore, a logic shifter is needed to send signals from the Arduino Nano to the sensor RX 
+            pin (R1 = 1k Ω, R2 = 2k Ω).
+        </li>
+        <br>
+        <li>
+            The DHT11 sensor is digital.
+        </li>
+        <br>
+        <li>
+            The MP503 sensor is analog. The Arduino Nano has a 10-bit analog to digital converter (ADC), which maps the input voltage 
+            between 0 and 5V into integer values from 0 to 1023. To figure out the exact concentration of gases from this output value,
+             refer to the graphs on the datasheet.
+        </li>
+    </ul>
+    <br>
+    <h3 style="width: 70%; margin: 0 auto"> Breadboarding: </h3>
+    <br>
+    <p style="width: 70%; margin: 0 auto">
+        The circuit was first prototyped using a breadboard after testing each sensor individually. This is also the stage where I 
+        figured out how to program the microcontroller so that it would read sensor data, and display the measured values on the OLED 
+        screen.
+    </p>
+    <br>
+    <img src="images/prototype.jpg" alt="prototype" width="500" style="display: block; margin: 0 auto; width: 50%;"/>
+    <br>
+    
+    <p  style="width: 70%; margin: 0 auto">
+        The Arduino IDE was used for programming. The code can be downloaded <a href="https://docs.arduino.cc/resources/datasheets/A000005-datasheet.pdf">HERE</a>.
+    </p>
+    <br>
+    <h3 style="width: 70%; margin: 0 auto"> Front Copper Layer (with Silkscreen): </h3>
+    <br>
+    <p  style="width: 70%; margin: 0 auto">
+        This is the front copper layer of the PCB designed to keep all the sensors, the screen, and the microcontroller board together.
+    </p>
+    <br>
+    <img src="images/C_FrontV2.png" alt="front" width="500" style="display: block; margin: 0 auto; width: 50%;"/>
+    <br>
+
+    <h3 style="width: 70%; margin: 0 auto"> Back Copper Layer (with Silkscreen): </h3>
+    <br>
+    <p  style="width: 70%; margin: 0 auto">
+        This is the back copper layer of the PCB. This is a ground plane with no signal traces. Several ground-stitching vias are 
+        scattered around the PCB to connect the ground plane to the ground space between the signal traces on the top layer to make 
+        sure the all ground spaces are unified.
+    </p>
+    <br>
+    <p  style="width: 70%; margin: 0 auto">
+    It is also important to note that for this project, this layer is not necessary. This project could have easily utilized just a 
+    single-sided PCB. However, the manufacturing cost of a single-sided vs double-sided PCB was the same, so I decided to go for a 
+    double-sided/2 layer PCB.
+    </p>
+    <br>
+    <img src="images/C_BackV2.png" alt="back" width="500" style="display: block; margin: 0 auto; width: 50%;"/>
+    <br>
+
+    <h3 style="width: 70%; margin: 0 auto"> Extra: </h3>
+    <br>
+    <p style="width: 70%; margin: 0 auto"> While the PCB for this project was ordered online, I later got trained on how to use the 
+        CNC milling machine that is located at one of the ECE makerspaces at NC State University. 
+    </p>
+    <br>
+    <img src="images/pcb_mill.jpg" alt="back" width="500" style="display: block; margin: 0 auto; width: 50%;"/>
+    <br>
+
+    <h3 style="width: 70%; margin: 0 auto"> Aseembling The PCB: </h3>
+    <br>
+    <p style="width: 70%; margin: 0 auto"> The PCB for this project was ordered through JLCPCB. Below is how the board looked like 
+        before assembly and after I finished soldering all the components. A case to hold everything together was also designed using 
+        Autodesk Fusion. The case was printed at the library. 
+    </p>
+    <br>
+    <img src="images/board.jpg" alt="back" width="500" style="display: block; margin: 0 auto; width: 50%;"/>
+    <br>
+    <img src="images/air_monitor.jpg" alt="back" width="500" style="display: block; margin: 0 auto; width: 50%;"/>
+    <br>
+
+
   </main>
 </body>
 </html>
